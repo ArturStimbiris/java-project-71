@@ -27,3 +27,13 @@ application {
 tasks.named<Test>("test") {
     useJUnitPlatform()
 }
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "hexlet.code.App"
+    }
+}
+
+tasks.getByName("run", JavaExec::class) {
+    standardInput = System.`in`
+}
