@@ -7,10 +7,10 @@ repositories {
 }
 
 dependencies {
+    implementation("info.picocli:picocli:4.7.6")
+
     testImplementation(libs.junit.jupiter)
-
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
     implementation(libs.guava)
 }
 
@@ -21,7 +21,7 @@ java {
 }
 
 application {
-    mainClass = "hexlet.code.App"
+    mainClass.set("hexlet.code.Gendiff")
 }
 
 tasks.named<Test>("test") {
@@ -30,10 +30,8 @@ tasks.named<Test>("test") {
 
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = "hexlet.code.App"
+        attributes["Main-Class"] = "hexlet.code.Gendiff"
     }
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 }
 
-tasks.getByName("run", JavaExec::class) {
-    standardInput = System.`in`
-}
