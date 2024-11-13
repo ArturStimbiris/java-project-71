@@ -1,5 +1,4 @@
 package hexlet.code;
-import hexlet.code.Differ;
 
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
