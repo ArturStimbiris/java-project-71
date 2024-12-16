@@ -1,5 +1,6 @@
 plugins {
     application
+    checkstyle
 }
 
 repositories {
@@ -7,6 +8,7 @@ repositories {
 }
 
 dependencies {
+    implementation("info.picocli:picocli:4.7.6")
     testImplementation(libs.junit.jupiter)
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -21,9 +23,16 @@ java {
 }
 
 application {
-    mainClass = "org.example.App"
+    mainClass.set("hexlet.code.Gendiff")
 }
 
 tasks.named<Test>("test") {
     useJUnitPlatform()
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "hexlet.code.Gendiff"
+    }
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 }
