@@ -1,3 +1,5 @@
+.PHONY: build
+
 run-dist:
 	java -jar ./app/build/libs/app.jar
 clean:
