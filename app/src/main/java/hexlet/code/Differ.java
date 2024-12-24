@@ -67,10 +67,6 @@ public class Differ {
             Comparator.comparing(Elem::getKey)
                 .thenComparing(Comparator.comparing(Elem::getIncl).reversed()));
         if (!map1.isEmpty() && !map2.isEmpty()) {
-            System.out.println("Парсинг JSON в Map:");
-            System.out.println(map1);
-            System.out.println(map2);
-            System.out.println(list);
             printListDefault(list);
         }
     }
