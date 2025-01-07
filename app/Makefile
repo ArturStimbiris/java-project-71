@@ -8,5 +8,7 @@ build:
 	./gradlew build
 run:
 	./gradlew run
-trun:
+runjson:
 	java -jar ./build/libs/app.jar ./src/test/resources/file1.json ./src/test/resources/file2.json
+runyaml:
+	java -jar ./build/libs/app.jar ./src/test/resources/file1.yaml ./src/test/resources/file2.yaml

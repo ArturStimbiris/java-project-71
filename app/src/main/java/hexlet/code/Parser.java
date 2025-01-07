@@ -56,7 +56,7 @@ public class Parser {
             String[] keyValue = line.split(":");
             String key = keyValue[0].trim();
 
-            Object value;
+            String value;
             if (keyValue.length > 1) {
                 value = keyValue[1].trim();
                 if (value.startsWith("\"") && value.endsWith("\"")) {

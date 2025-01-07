@@ -2,6 +2,7 @@ package hexlet.code;
 import java.util.Map;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Differ {
@@ -56,18 +57,41 @@ public class Differ {
         System.out.println("}");
     }
 
+    public static String getFileType(String filePath) {
+        String[] parts = filePath.split("\\.");
+        return parts[parts.length - 1];
+    }
+
     public static void generate(String filePath1, String filePath2) {
-        Map<String, Object> map1 = Parser.readJsonToMap(filePath1);
-        Map<String, Object> map2 = Parser.readJsonToMap(filePath2);
-        var list = new LinkedList<Elem>();
-        list.addAll(addSame(map1, map2));
-        list.addAll(addNew(map1, map2));
-        list.addAll(addDel(map1, map2));
-        Collections.sort(list,
-            Comparator.comparing(Elem::getKey)
-                .thenComparing(Comparator.comparing(Elem::getIncl).reversed()));
-        if (!map1.isEmpty() && !map2.isEmpty()) {
-            printListDefault(list);
+        var file1type = getFileType(filePath1);
+        var file2type = getFileType(filePath2);
+        Map<String, Object> map1 = new HashMap<>();
+        Map<String, Object> map2 = new HashMap<>();
+        if (!file1type.equals(file2type)) {
+            System.err.println("Файлы должны быть одного типа!");
+        } else {
+            switch (file1type) {
+                case "json":
+                    map1 = Parser.readJsonToMap(filePath1);
+                    map2 = Parser.readJsonToMap(filePath2);
+                    break;
+                case "yaml":
+                    map1 = Parser.readYamlToMap(filePath1);
+                    map2 = Parser.readYamlToMap(filePath2);
+                    break;
+                default:
+                    break;
+            }
+            var list = new LinkedList<Elem>();
+            list.addAll(addSame(map1, map2));
+            list.addAll(addNew(map1, map2));
+            list.addAll(addDel(map1, map2));
+            Collections.sort(list,
+                Comparator.comparing(Elem::getKey)
+                    .thenComparing(Comparator.comparing(Elem::getIncl).reversed()));
+            if (!map1.isEmpty() && !map2.isEmpty()) {
+                printListDefault(list);
+            }
         }
     }
 }
