@@ -1,5 +1,8 @@
 package hexlet.code;
 import java.util.Map;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -62,6 +65,28 @@ public class Differ {
         return parts[parts.length - 1];
     }
 
+    public static Map<String, Object> readJsonToMap(String path) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            String jsonString = Files.readString(Paths.get(path));
+            map = ParserJson.parseJson(jsonString);
+        } catch (IOException e) {
+            System.err.println("Ошибка при чтении файла: " + e.getMessage());
+        }
+        return map;
+    }
+
+    public static Map<String, Object> readYamlToMap(String path) {
+        Map<String, Object> map = new HashMap<>();
+        try {
+            String yamlString = Files.readString(Paths.get(path));
+            map = ParserYaml.parseYaml(yamlString);
+        } catch (IOException e) {
+            System.err.println("Ошибка при чтении файла: " + e.getMessage());
+        }
+        return map;
+    }
+
     public static void generate(String filePath1, String filePath2) {
         var file1type = getFileType(filePath1);
         var file2type = getFileType(filePath2);
@@ -72,12 +97,12 @@ public class Differ {
         } else {
             switch (file1type) {
                 case "json":
-                    map1 = Parser.readJsonToMap(filePath1);
-                    map2 = Parser.readJsonToMap(filePath2);
+                    map1 = readJsonToMap(filePath1);
+                    map2 = readJsonToMap(filePath2);
                     break;
                 case "yaml":
-                    map1 = Parser.readYamlToMap(filePath1);
-                    map2 = Parser.readYamlToMap(filePath2);
+                    map1 = readYamlToMap(filePath1);
+                    map2 = readYamlToMap(filePath2);
                     break;
                 default:
                     break;

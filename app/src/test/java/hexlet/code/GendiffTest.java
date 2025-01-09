@@ -21,7 +21,7 @@ class GendiffTest {
     public void testParceYaml() {
         String testYaml = "host: hexlet.io\n"
             + "timeout: 50";
-        Map<String, Object> outMap = Parser.parseYaml(testYaml);
+        Map<String, Object> outMap = ParserYaml.parseYaml(testYaml);
         Map<String, Object> expectedMap = new HashMap<>();
         expectedMap.put("host", "hexlet.io");
         expectedMap.put("timeout", "50");
@@ -34,7 +34,7 @@ class GendiffTest {
             + "\"host\": \"hexlet.io\","
             + "\"timeout\": 50,"
             + "}";
-        Map<String, Object> outMap = Parser.parseJson(testJson);
+        Map<String, Object> outMap = ParserJson.parseJson(testJson);
         Map<String, Object> expectedMap = new HashMap<>();
         expectedMap.put("host", "hexlet.io");
         expectedMap.put("timeout", "50");
