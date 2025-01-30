@@ -87,7 +87,7 @@ public class Differ {
         return map;
     }
 
-    public static void generate(String filePath1, String filePath2) {
+    public static void generate(String filePath1, String filePath2, String format) {
         var file1type = getFileType(filePath1);
         var file2type = getFileType(filePath2);
         Map<String, Object> map1 = new HashMap<>();
@@ -115,7 +115,17 @@ public class Differ {
                 Comparator.comparing(Elem::getKey)
                     .thenComparing(Comparator.comparing(Elem::getIncl).reversed()));
             if (!map1.isEmpty() && !map2.isEmpty()) {
-                printListDefault(list);
+                switch (format) {
+                    case "stylish":
+                        Formater.stylish(list);
+                        break;
+                    case "plain":
+                        break;
+                    case "json":
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Неизвестный формат: " + format);
+                }
             }
         }
     }

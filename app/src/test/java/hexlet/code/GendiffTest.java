@@ -82,9 +82,10 @@ class GendiffTest {
 
     @Test
     public void testDiffJson() throws Exception {
+        String format = "stylish";
         String filepath1 = "src/test/resources/file1.json";
         String filepath2 = "src/test/resources/file2.json";
-        Differ.generate(filepath1, filepath2);
+        Differ.generate(filepath1, filepath2, format);
         String expectedOutput = "{\n"
             + "- follow: false\n"
             + "  host: hexlet.io\n"
@@ -99,9 +100,10 @@ class GendiffTest {
 
     @Test
     public void testDiffYaml() throws Exception {
+        String format = "stylish";
         String filepath1 = "src/test/resources/file1.yaml";
         String filepath2 = "src/test/resources/file2.yaml";
-        Differ.generate(filepath1, filepath2);
+        Differ.generate(filepath1, filepath2, format);
         String expectedOutput = "{\n"
             + "- follow: false\n"
             + "  host: hexlet.io\n"
