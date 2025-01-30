@@ -17,23 +17,19 @@ public class ParserJson {
         String[] pairs = splitJsonPairs(json);
 
         for (String pair : pairs) {
-            String[] keyValue = pair.split(":", 2); // Разделяем только на 2 части
+            String[] keyValue = pair.split(":", 2);
             String key = keyValue[0].trim().replaceAll("\"", "");
             String value = keyValue[1].trim();
 
             if (value.startsWith("{") && value.endsWith("}")) {
-                // Если значение - это объект, рекурсивно парсим его
                 map.put(key, parseJson(value));
             } else if (value.startsWith("[") && value.endsWith("]")) {
-                // Если значение - это массив, парсим его
                 map.put(key, parseJsonArray(value));
             } else if (value.startsWith("\"") && value.endsWith("\"")) {
-                // Если значение - это строка
                 value = value.substring(1, value.length() - 1);
                 map.put(key, value);
             } else {
-                // Если значение - это число или логическое значение
-                map.put(key, parsePrimitive(value));
+                map.put(key, value);
             }
         }
 
@@ -86,27 +82,10 @@ public class ParserJson {
             } else if (element.startsWith("\"") && element.endsWith("\"")) {
                 list.add(element.substring(1, element.length() - 1));
             } else {
-                list.add(parsePrimitive(element));
+                list.add(element);
             }
         }
 
         return list;
-    }
-
-    private static Object parsePrimitive(String value) {
-        value = value.trim();
-        if (value.equals("true") || value.equals("false")) {
-            return Boolean.parseBoolean(value);
-        } else {
-            try {
-                return Integer.parseInt(value);
-            } catch (NumberFormatException e1) {
-                try {
-                    return Double.parseDouble(value);
-                } catch (NumberFormatException e2) {
-                    return value; // Возвращаем как строку, если не число
-                }
-            }
-        }
     }
 }
