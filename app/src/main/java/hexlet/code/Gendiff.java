@@ -27,6 +27,7 @@ public class Gendiff implements Runnable {
 
     @Override
     public void run() {
-        Differ.generate(filepath1, filepath2, format);
+        String diff = Differ.generate(filepath1, filepath2, format);
+        System.out.println(diff);
     }
 }

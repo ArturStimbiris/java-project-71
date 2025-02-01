@@ -87,11 +87,12 @@ public class Differ {
         return map;
     }
 
-    public static void generate(String filePath1, String filePath2, String format) {
+    public static String generate(String filePath1, String filePath2, String format) {
         var file1type = getFileType(filePath1);
         var file2type = getFileType(filePath2);
         Map<String, Object> map1 = new HashMap<>();
         Map<String, Object> map2 = new HashMap<>();
+        String text = "";
         if (!file1type.equals(file2type)) {
             System.err.println("Файлы должны быть одного типа!");
         } else {
@@ -117,9 +118,10 @@ public class Differ {
             if (!map1.isEmpty() && !map2.isEmpty()) {
                 switch (format) {
                     case "stylish":
-                        Formater.stylish(list);
+                        text = Formater.stylish(list);
                         break;
                     case "plain":
+                        text = Formater.plain(list);
                         break;
                     case "json":
                         break;
@@ -128,5 +130,6 @@ public class Differ {
                 }
             }
         }
+        return text;
     }
 }

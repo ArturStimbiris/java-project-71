@@ -1,22 +1,12 @@
 package hexlet.code;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class GendiffTest {
-    private ByteArrayOutputStream output = new ByteArrayOutputStream();
-
-    @BeforeEach
-    public void setUpStreams() {
-        System.setOut(new PrintStream(output));
-    }
 
     @Test
     public void testParceYamlWithNestedStructures() {
@@ -85,7 +75,7 @@ class GendiffTest {
         String format = "stylish";
         String filepath1 = "src/test/resources/file1.json";
         String filepath2 = "src/test/resources/file2.json";
-        Differ.generate(filepath1, filepath2, format);
+        String outStr = Differ.generate(filepath1, filepath2, format);
         String expectedOutput = "{\n"
             + "- follow: false\n"
             + "  host: hexlet.io\n"
@@ -94,7 +84,6 @@ class GendiffTest {
             + "+ timeout: 20\n"
             + "+ verbose: true\n"
             + "}";
-        String outStr = output.toString().trim();
         assertEquals(expectedOutput.trim(), outStr);
     }
 
@@ -103,7 +92,7 @@ class GendiffTest {
         String format = "stylish";
         String filepath1 = "src/test/resources/file1.yaml";
         String filepath2 = "src/test/resources/file2.yaml";
-        Differ.generate(filepath1, filepath2, format);
+        String outStr = Differ.generate(filepath1, filepath2, format);
         String expectedOutput = "{\n"
             + "- follow: false\n"
             + "  host: hexlet.io\n"
@@ -112,12 +101,6 @@ class GendiffTest {
             + "+ timeout: 20\n"
             + "+ verbose: true\n"
             + "}";
-        String outStr = output.toString().trim();
         assertEquals(expectedOutput.trim(), outStr);
-    }
-
-    @AfterEach
-    public void cleanUpStreams() {
-        System.setOut(null);
     }
 }

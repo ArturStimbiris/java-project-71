@@ -26,3 +26,6 @@ runyaml1:
 
 runyaml2:
 	java -jar ./app/build/libs/app.jar ./app/src/test/resources/file3.yaml ./app/src/test/resources/file4.yaml
+
+runyaml2p:
+	java -jar ./app/build/libs/app.jar -f plain ./app/src/test/resources/file3.yaml ./app/src/test/resources/file4.yaml
