@@ -33,10 +33,12 @@ class GendiffTest {
 
     @Test
     public void testParceJson() {
-        String testJson = "{\n"
-            + "\"host\": \"hexlet.io\","
-            + "\"timeout\": 50,"
-            + "}";
+        String testJson = """
+                {
+                    "host": "hexlet.io",
+                    "timeout": 50
+                }
+                """;
         Map<String, Object> outMap = ParserJson.parseJson(testJson);
         Map<String, Object> expectedMap = new HashMap<>();
         expectedMap.put("host", "hexlet.io");
@@ -46,14 +48,16 @@ class GendiffTest {
 
     @Test
     public void testParseJsonWithNestedStructures() {
-        String testJson = "{\n"
-            + "\"numbers4\": [4, 5, 6],\n"
-            + "\"chars1\": [\"a\", \"b\", \"c\"],\n"
-            + "\"obj1\": {\n"
-            + "  \"nestedKey\": \"value\",\n"
-            + "  \"isNested\": true\n"
-            + "}\n"
-            + "}";
+        String testJson = """
+                {
+                    "numbers4": [4, 5, 6],
+                    "chars1": ["a", "b", "c"],
+                    "obj1": {
+                        "nestedKey": "value",
+                        "isNested": true
+                    }
+                }
+            """;
         Map<String, Object> expectedMap = new HashMap<>();
         expectedMap.put("numbers4", Arrays.asList("4", "5", "6"));
         expectedMap.put("chars1", Arrays.asList("a", "b", "c"));
@@ -76,14 +80,15 @@ class GendiffTest {
         String filepath1 = "src/test/resources/file1.json";
         String filepath2 = "src/test/resources/file2.json";
         String outStr = Differ.generate(filepath1, filepath2, format);
-        String expectedOutput = "{\n"
-            + "- follow: false\n"
-            + "  host: hexlet.io\n"
-            + "- proxy: 123.234.53.22\n"
-            + "- timeout: 50\n"
-            + "+ timeout: 20\n"
-            + "+ verbose: true\n"
-            + "}";
+        String expectedOutput = """
+            {
+            - follow: false
+              host: hexlet.io
+            - proxy: 123.234.53.22
+            - timeout: 50
+            + timeout: 20
+            + verbose: true
+            }""";
         assertEquals(expectedOutput.trim(), outStr);
     }
 
@@ -93,14 +98,30 @@ class GendiffTest {
         String filepath1 = "src/test/resources/file1.yaml";
         String filepath2 = "src/test/resources/file2.yaml";
         String outStr = Differ.generate(filepath1, filepath2, format);
-        String expectedOutput = "{\n"
-            + "- follow: false\n"
-            + "  host: hexlet.io\n"
-            + "- proxy: 123.234.53.22\n"
-            + "- timeout: 50\n"
-            + "+ timeout: 20\n"
-            + "+ verbose: true\n"
-            + "}";
+        String expectedOutput = """
+            {
+            - follow: false
+              host: hexlet.io
+            - proxy: 123.234.53.22
+            - timeout: 50
+            + timeout: 20
+            + verbose: true
+            }""";
+        assertEquals(expectedOutput.trim(), outStr);
+    }
+
+    @Test
+    public void testDiffPlain() throws Exception {
+        String format = "plain";
+        String filepath1 = "src/test/resources/file1.yaml";
+        String filepath2 = "src/test/resources/file2.yaml";
+        String outStr = Differ.generate(filepath1, filepath2, format);
+        String expectedOutput = """
+                Property 'follow' was removed
+                Property 'proxy' was removed
+                Property 'timeout' was updated. From 50 to 20
+                Property 'verbose' was added with value: true
+                """;
         assertEquals(expectedOutput.trim(), outStr);
     }
 }

@@ -123,8 +123,6 @@ public class Differ {
                     case "plain":
                         text = Formater.plain(list);
                         break;
-                    case "json":
-                        break;
                     default:
                         throw new IllegalArgumentException("Неизвестный формат: " + format);
                 }
