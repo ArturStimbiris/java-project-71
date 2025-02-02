@@ -84,6 +84,24 @@ public class Formater {
         return text.toString();
     }
 
+    public static String json(LinkedList<Elem> list) {
+        StringBuilder text = new StringBuilder();
+        text.append("{\n");
+        for (var item : list) {
+            String key = item.getKey();
+            Object value = item.getValue();
+            String incl = item.getIncl();
+            text.append("  \"").append(key).append("\": ");
+            text.append("\"").append(value).append("\"");
+            if (!item.equals(list.getLast())) {
+                text.append(",");
+            }
+            text.append("\n");
+        }
+        text.append("}");
+        return text.toString();
+    }
+
     private static String formatValue(Object val) {
         if (isComplexValue(val)) {
             return "[complex value]";

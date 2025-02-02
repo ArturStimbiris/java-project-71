@@ -29,3 +29,6 @@ runyaml2:
 
 runyaml2p:
 	java -jar ./app/build/libs/app.jar -f plain ./app/src/test/resources/file3.yaml ./app/src/test/resources/file4.yaml
+
+runyaml2j:
+	java -jar ./app/build/libs/app.jar -f json ./app/src/test/resources/file3.yaml ./app/src/test/resources/file4.yaml
