@@ -124,4 +124,22 @@ class GendiffTest {
                 """;
         assertEquals(expectedOutput.trim(), outStr);
     }
+
+    @Test
+    public void testJsonJson() throws Exception {
+        String format = "json";
+        String filepath1 = "src/test/resources/file1.json";
+        String filepath2 = "src/test/resources/file2.json";
+        String outStr = Differ.generate(filepath1, filepath2, format);
+        String expectedOutput = """
+                {
+                  "follow": "false",
+                  "host": "hexlet.io",
+                  "proxy": "123.234.53.22",
+                  "timeout": "50",
+                  "timeout": "20",
+                  "verbose": "true"
+                }""";
+        assertEquals(expectedOutput.trim(), outStr);
+    }
 }

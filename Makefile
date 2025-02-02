@@ -32,3 +32,6 @@ runyaml2p:
 
 runyaml2j:
 	java -jar ./app/build/libs/app.jar -f json ./app/src/test/resources/file3.yaml ./app/src/test/resources/file4.yaml
+
+runjson1j:
+	java -jar ./app/build/libs/app.jar -f json ./app/src/test/resources/file1.json ./app/src/test/resources/file2.json
