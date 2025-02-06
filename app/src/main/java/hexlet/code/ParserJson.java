@@ -28,6 +28,12 @@ public class ParserJson {
             } else if (value.startsWith("\"") && value.endsWith("\"")) {
                 value = value.substring(1, value.length() - 1);
                 map.put(key, value);
+            } else if (value.equals("true") || value.equals("false")) {
+                map.put(key, Boolean.parseBoolean(value));
+            } else if (value.matches("-?\\d+")) {
+                map.put(key, Integer.parseInt(value));
+            } else if (value.matches("-?\\d+\\.\\d+")) {
+                map.put(key, Double.parseDouble(value));
             } else {
                 map.put(key, value);
             }
@@ -81,6 +87,12 @@ public class ParserJson {
                 list.add(parseJson(element));
             } else if (element.startsWith("\"") && element.endsWith("\"")) {
                 list.add(element.substring(1, element.length() - 1));
+            } else if (element.equals("true") || element.equals("false")) {
+                list.add(Boolean.parseBoolean(element));
+            } else if (element.matches("-?\\d+")) {
+                list.add(Integer.parseInt(element));
+            } else if (element.matches("-?\\d+\\.\\d+")) {
+                list.add(Double.parseDouble(element));
             } else {
                 list.add(element);
             }

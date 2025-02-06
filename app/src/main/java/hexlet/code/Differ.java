@@ -52,12 +52,15 @@ public class Differ {
         return delList;
     }
 
-    public static void printListDefault(LinkedList<Elem> list) {
-        System.out.println("{");
-        for (var item : list) {
-            System.out.println(item);
-        }
-        System.out.println("}");
+    public static LinkedList<Elem> compareSort(Map<String, Object> map1, Map<String, Object> map2) {
+        var list = new LinkedList<Elem>();
+        list.addAll(addSame(map1, map2));
+        list.addAll(addNew(map1, map2));
+        list.addAll(addDel(map1, map2));
+        Collections.sort(list,
+            Comparator.comparing(Elem::getKey)
+                .thenComparing(Comparator.comparing(Elem::getIncl).reversed()));
+        return list;
     }
 
     public static String getFileType(String filePath) {
@@ -87,12 +90,11 @@ public class Differ {
         return map;
     }
 
-    public static String generate(String filePath1, String filePath2, String format) {
+    public static LinkedList<Elem> genDiffList(String filePath1, String filePath2) {
         var file1type = getFileType(filePath1);
         var file2type = getFileType(filePath2);
         Map<String, Object> map1 = new HashMap<>();
         Map<String, Object> map2 = new HashMap<>();
-        String text = "";
         if (!file1type.equals(file2type)) {
             System.err.println("Файлы должны быть одного типа!");
         } else {
@@ -108,29 +110,17 @@ public class Differ {
                 default:
                     break;
             }
-            var list = new LinkedList<Elem>();
-            list.addAll(addSame(map1, map2));
-            list.addAll(addNew(map1, map2));
-            list.addAll(addDel(map1, map2));
-            Collections.sort(list,
-                Comparator.comparing(Elem::getKey)
-                    .thenComparing(Comparator.comparing(Elem::getIncl).reversed()));
-            if (!map1.isEmpty() && !map2.isEmpty()) {
-                switch (format) {
-                    case "stylish":
-                        text = Formater.stylish(list);
-                        break;
-                    case "plain":
-                        text = Formater.plain(list);
-                        break;
-                    case "json":
-                        text = Formater.json(list);
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Неизвестный формат: " + format);
-                }
-            }
         }
-        return text;
+        return compareSort(map1, map2);
+    }
+
+    public static String generate(String filePath1, String filePath2, String format) {
+        var list = genDiffList(filePath1, filePath2);
+        return Formater.formatList(list, format);
+    }
+
+    public static String generate(String filePath1, String filePath2) {
+        var list = genDiffList(filePath1, filePath2);
+        return Formater.formatList(list);
     }
 }

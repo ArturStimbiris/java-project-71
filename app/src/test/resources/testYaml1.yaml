@@ -1,0 +1,11 @@
+numbers4:
+  - 4
+  - 5
+  - 6
+chars1:
+  - a
+  - b
+  - c
+obj1:
+  nestedKey: value
+  isNested: true

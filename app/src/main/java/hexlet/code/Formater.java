@@ -3,6 +3,29 @@ package hexlet.code;
 import java.util.LinkedList;
 
 public class Formater {
+    public static String formatList(LinkedList<Elem> list, String format) {
+        if (!list.isEmpty()) {
+            switch (format) {
+                case "stylish":
+                    return stylish(list);
+                case "plain":
+                    return plain(list);
+                case "json":
+                    return json(list);
+                default:
+                    throw new IllegalArgumentException("Неизвестный формат: " + format);
+            }
+        }
+        return "";
+    }
+
+    public static String formatList(LinkedList<Elem> list) {
+        if (!list.isEmpty()) {
+            return stylish(list);
+        }
+        return "";
+    }
+
     public static String stylish(LinkedList<Elem> list) {
         StringBuilder text = new StringBuilder();
         text.append("{\n");
