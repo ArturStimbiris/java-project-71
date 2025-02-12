@@ -22,7 +22,7 @@ java {
 }
 
 application {
-    mainClass.set("hexlet.code.Gendiff")
+    mainClass.set("hexlet.code.App")
 }
 
 tasks.named<Test>("test") {
@@ -31,7 +31,7 @@ tasks.named<Test>("test") {
 
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = "hexlet.code.Gendiff"
+        attributes["Main-Class"] = "hexlet.code.App"
     }
     from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
 }

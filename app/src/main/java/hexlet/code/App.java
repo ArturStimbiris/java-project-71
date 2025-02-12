@@ -12,7 +12,7 @@ import java.util.concurrent.Callable;
     version = "gendiff 1.0.0",
     description = "Compares two configuration files and shows a difference.")
 
-public class Gendiff implements Callable<String> {
+public class App implements Callable<String> {
     @Parameters(index = "0", paramLabel = "filepath1", description = "path to first file")
     private String filepath1;
 
@@ -23,7 +23,7 @@ public class Gendiff implements Callable<String> {
     private String format;
 
     public static void main(String[] args) {
-        int exitCode = new CommandLine(new Gendiff()).execute(args);
+        int exitCode = new CommandLine(new App()).execute(args);
         System.exit(exitCode);
     }
 
