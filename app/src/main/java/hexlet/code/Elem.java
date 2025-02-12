@@ -2,14 +2,14 @@ package hexlet.code;
 
 public class Elem {
     private String incl;
-    private String key;
+    private Object key;
     private Object value;
 
     public Elem() {
 
     }
 
-    public Elem(String incl, String key, Object value) {
+    public Elem(String incl, Object key, Object value) {
         this.incl = incl;
         this.key = key;
         this.value = value;
@@ -23,11 +23,11 @@ public class Elem {
         this.incl = incl;
     }
 
-    public String getKey() {
+    public Object getKey() {
         return key;
     }
 
-    public void setKey(String key) {
+    public void setKey(Object key) {
         this.key = key;
     }
 

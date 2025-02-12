@@ -111,7 +111,7 @@ public class Formater {
         StringBuilder text = new StringBuilder();
         text.append("{\n");
         for (var item : list) {
-            String key = item.getKey();
+            Object key = item.getKey();
             Object value = item.getValue();
             String incl = item.getIncl();
             text.append("  \"").append(key).append("\": ");
