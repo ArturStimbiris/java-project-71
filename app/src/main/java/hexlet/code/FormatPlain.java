@@ -3,66 +3,29 @@ package hexlet.code;
 import java.util.LinkedList;
 
 public class FormatPlain {
-    public static String plain(LinkedList<Elem> list) {
-        LinkedList<Elem> copyList = new LinkedList<>(list);
+    public static String makeText(LinkedList<Element> list) {
         StringBuilder text = new StringBuilder();
-        for (var item1 : list) {
-            var incl1 = item1.getIncl();
-            var key1 = item1.getKey();
-            Object val1 = item1.getValue();
-            Object val2 = null;
-            String mod = "skip";
-            switch (incl1) {
-                case " ":
-                    mod = "skip";
+        for (var item : list) {
+            Object key = item.getKey();
+            Object value1 = item.getValue1();
+            Object value2 = item.getValue2();
+            switch (item.getIncl()) {
+                case "unchanged":
                     break;
-                case "-":
-                    for (var item2 : copyList) {
-                        if (key1.equals(item2.getKey()) && item2.getIncl().equals("+")) {
-                            mod = "mod";
-                            val1 = item1.getValue();
-                            val2 = item2.getValue();
-                            copyList.remove(item2);
-                            break;
-                        }
-                    }
-                    if (!mod.equals("mod")) {
-                        mod = "del";
-                    }
+                case "changed":
+                    text.append("Property '");
+                    text.append(key);
+                    text.append("' was updated. From ");
+                    text.append(formatValue(value1));
+                    text.append(" to ");
+                    text.append(formatValue(value2));
+                    text.append("\n");
                     break;
-                case "+":
-                    boolean upd = false;
-                    for (var item2 : copyList) {
-                        if (key1.equals(item2.getKey()) && item2.getIncl().equals("-")) {
-                            upd = true;
-                            break;
-                        }
-                    }
-                    if (!upd) {
-                        mod = "add";
-                        val1 = item1.getValue();
-                    }
+                case "deleted":
+                    text.append("Property '" + key + "' was removed\n");
                     break;
-                default:
-                    break;
-            }
-            switch (mod) {
-                case "skip":
-                    break;
-                case "mod":
-                    text.append("Property '"
-                        + key1
-                        + "' was updated. From "
-                        + formatValue(val1)
-                        + " to "
-                        + formatValue(val2)
-                        + "\n");
-                    break;
-                case "del":
-                    text.append("Property '" + key1 + "' was removed\n");
-                    break;
-                case "add":
-                    text.append("Property '" + key1 + "' was added with value: " + formatValue(val1) + "\n");
+                case "added":
+                    text.append("Property '" + key + "' was added with value: " + formatValue(value1) + "\n");
                     break;
                 default:
                     break;

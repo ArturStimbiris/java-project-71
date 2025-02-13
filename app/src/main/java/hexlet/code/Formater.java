@@ -3,15 +3,15 @@ package hexlet.code;
 import java.util.LinkedList;
 
 public class Formater {
-    public static String formatList(LinkedList<Elem> list, String format) {
+    public static String formatList(LinkedList<Element> list, String format) {
         if (!list.isEmpty()) {
             switch (format) {
                 case "stylish":
-                    return FormatStylish.stylish(list);
+                    return FormatStylish.makeText(list);
                 case "plain":
-                    return FormatPlain.plain(list);
+                    return FormatPlain.makeText(list);
                 case "json":
-                    return FormatJson.json(list);
+                    return FormatJson.makeText(list);
                 default:
                     throw new IllegalArgumentException("Неизвестный формат: " + format);
             }
@@ -19,9 +19,9 @@ public class Formater {
         return "";
     }
 
-    public static String formatList(LinkedList<Elem> list) {
+    public static String formatList(LinkedList<Element> list) {
         if (!list.isEmpty()) {
-            return FormatStylish.stylish(list);
+            return FormatStylish.makeText(list);
         }
         return "";
     }

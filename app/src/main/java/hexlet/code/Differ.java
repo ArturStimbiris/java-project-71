@@ -38,7 +38,7 @@ public class Differ {
         return map;
     }
 
-    public static LinkedList<Elem> genDiffList(String filePath1, String filePath2) {
+    public static LinkedList<Element> genDiffList(String filePath1, String filePath2) {
         var file1type = getFileType(filePath1);
         var file2type = getFileType(filePath2);
         Map<Object, Object> map1 = new HashMap<>();
@@ -59,7 +59,7 @@ public class Differ {
                     break;
             }
         }
-        return TreeBuilder.compareSort(map1, map2);
+        return TreeBuilder.buildTree(map1, map2);
     }
 
     public static String generate(String filePath1, String filePath2, String format) {
