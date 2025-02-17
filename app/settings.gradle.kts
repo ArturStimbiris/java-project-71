@@ -4,3 +4,4 @@ plugins {
 }
 
 rootProject.name = "app"
+include("app")
