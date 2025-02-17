@@ -2,6 +2,10 @@ package hexlet.code;
 
 import java.util.LinkedList;
 
+import hexlet.code.formats.FormatJson;
+import hexlet.code.formats.FormatStylish;
+import hexlet.code.formats.FormatPlain;
+
 public class Formater {
     public static String formatList(LinkedList<Element> list, String format) {
         if (!list.isEmpty()) {
@@ -15,13 +19,6 @@ public class Formater {
                 default:
                     throw new IllegalArgumentException("Неизвестный формат: " + format);
             }
-        }
-        return "";
-    }
-
-    public static String formatList(LinkedList<Element> list) {
-        if (!list.isEmpty()) {
-            return FormatStylish.makeText(list);
         }
         return "";
     }

@@ -1,6 +1,8 @@
-package hexlet.code;
+package hexlet.code.formats;
 
 import java.util.LinkedList;
+
+import hexlet.code.Element;
 
 public class FormatJson {
     public static String makeText(LinkedList<Element> list) {
