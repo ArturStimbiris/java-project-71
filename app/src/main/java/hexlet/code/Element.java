@@ -23,40 +23,40 @@ public class Element {
         this.value1 = value1;
     }
 
-    public String getIncl() {
+    public final String getIncl() {
         return incl;
     }
 
-    public void setIncl(String incl) {
+    public final void setIncl(String incl) {
         this.incl = incl;
     }
 
-    public Object getKey() {
+    public final Object getKey() {
         return key;
     }
 
-    public void setKey(Object key) {
+    public final void setKey(Object key) {
         this.key = key;
     }
 
-    public Object getValue1() {
+    public final Object getValue1() {
         return value1;
     }
 
-    public void setValue1(Object value1) {
+    public final void setValue1(Object value1) {
         this.value1 = value1;
     }
 
-    public Object getValue2() {
+    public final Object getValue2() {
         return value2;
     }
 
-    public void setValue2(Object value2) {
+    public final void setValue2(Object value2) {
         this.value2 = value2;
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return incl + " " + key + " " + value1 + " " + ((value2 != null) ? value2 : "");
     }
 }
