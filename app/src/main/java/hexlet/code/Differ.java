@@ -25,6 +25,9 @@ public class Differ {
             } else if (fileType.equals("yaml")) {
                 String yamlString = Files.readString(Paths.get(path));
                 map = ParserYaml.parseYaml(yamlString);
+            } else if (fileType.equals("yml")) {
+                String yamlString = Files.readString(Paths.get(path));
+                map = ParserYaml.parseYaml(yamlString);
             } else {
                 System.err.println("Неподдерживаемый формат файла");
             }
