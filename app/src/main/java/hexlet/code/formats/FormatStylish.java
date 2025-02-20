@@ -14,17 +14,17 @@ public class FormatStylish {
             Object value2 = item.getValue2();
             switch (item.getIncl()) {
                 case "unchanged":
-                    text.append("  " + key + ": " + value1 + "\n");
+                    text.append("    " + key + ": " + value1 + "\n");
                     break;
                 case "changed":
-                    text.append("- " + key + ": " + value1 + "\n");
-                    text.append("+ " + key + ": " + value2 + "\n");
+                    text.append("  - " + key + ": " + value1 + "\n");
+                    text.append("  + " + key + ": " + value2 + "\n");
                     break;
                 case "deleted":
-                    text.append("- " + key + ": " + value1 + "\n");
+                    text.append("  - " + key + ": " + value1 + "\n");
                     break;
                 case "added":
-                    text.append("+ " + key + ": " + value1 + "\n");
+                    text.append("  + " + key + ": " + value1 + "\n");
                     break;
                 default:
                     break;

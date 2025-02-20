@@ -11,12 +11,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 public class Differ {
-    public static String getFileType(String filePath) {
+    private static String getFileType(String filePath) {
         String[] parts = filePath.split("\\.");
         return parts[parts.length - 1];
     }
 
-    public static Map<Object, Object> readToMap(String path, String fileType) {
+    private static Map<Object, Object> readToMap(String path, String fileType) {
         Map<Object, Object> map = new HashMap<>();
         try {
             if (fileType.equals("json")) {
@@ -36,7 +36,7 @@ public class Differ {
         return map;
     }
 
-    public static LinkedList<Element> genDiffList(String filePath1, String filePath2) {
+    private static LinkedList<Element> genDiffList(String filePath1, String filePath2) {
         var file1type = getFileType(filePath1);
         var file2type = getFileType(filePath2);
         Map<Object, Object> map1 = new HashMap<>();
