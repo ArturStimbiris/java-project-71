@@ -15,6 +15,8 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
 }
 
+group = "hexlet.code"
+
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
